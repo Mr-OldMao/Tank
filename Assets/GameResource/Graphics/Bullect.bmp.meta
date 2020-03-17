@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 156edf117960b9b40955ebbabaa99937
-timeCreated: 1508209493
+timeCreated: 1584358726
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -16,8 +16,6 @@ TextureImporter:
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
-    mipMapsPreserveCoverage: 0
-    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -33,13 +31,10 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
-    serializedVersion: 2
     filterMode: -1
     aniso: -1
     mipBias: -1
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -82,15 +77,14 @@ TextureImporter:
       name: bullet_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
-        width: 7
+        width: 6
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: bullet_1
@@ -101,10 +95,9 @@ TextureImporter:
         width: 8
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: bullet_2
@@ -115,10 +108,9 @@ TextureImporter:
         width: 7
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: bullet_3
@@ -129,13 +121,11 @@ TextureImporter:
         width: 8
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     outline: []
-    physicsShape: []
   spritePackingTag: 
   userData: 
   assetBundleName: 
