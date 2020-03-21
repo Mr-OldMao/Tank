@@ -17,28 +17,44 @@ Platform assembly: D:\UnityNameSpace\Tank\_BuildPC\坦克大战2.0_Data\Managed\
 Loading D:\UnityNameSpace\Tank\_BuildPC\坦克大战2.0_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: D:\UnityNameSpace\Tank\_BuildPC\坦克大战2.0_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
 Loading D:\UnityNameSpace\Tank\_BuildPC\坦克大战2.0_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.155 seconds
+- Completed reload, in  0.188 seconds
 Platform assembly: D:\UnityNameSpace\Tank\_BuildPC\坦克大战2.0_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: D:\UnityNameSpace\Tank\_BuildPC\坦克大战2.0_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.105900 ms
+UnloadTime: 1.197900 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 11f4 -> priority: 1 
-  Thread -> id: 5078 -> priority: 1 
+  Thread -> id: 1f58 -> priority: 1 
+  Thread -> id: 4a68 -> priority: 1 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.439600 ms
+UnloadTime: 2.311300 ms
 
 Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 587.
-Total: 0.313600 ms (FindLiveObjects: 0.025000 ms CreateObjectMapping: 0.037400 ms MarkObjects: 0.208400 ms  DeleteObjects: 0.042300 ms)
+Total: 0.355700 ms (FindLiveObjects: 0.026800 ms CreateObjectMapping: 0.026300 ms MarkObjects: 0.252200 ms  DeleteObjects: 0.049600 ms)
 
-GG
+0
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-CoreDestory
+7
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+6
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+获得奖励：Bomb
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+获得奖励：LevelAdd
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 

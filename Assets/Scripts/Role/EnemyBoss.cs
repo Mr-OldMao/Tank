@@ -5,7 +5,7 @@ using UnityEngine;
 /// 新型敌方坦克
 /// </summary>
 public class EnemyBoss : Enemy
-{
+{ 
     public EnemyColorType enemyColorType = EnemyColorType.white;
     [Header("红、绿、黄、白")]
     public Sprite[] upArr;
@@ -14,7 +14,9 @@ public class EnemyBoss : Enemy
     public Sprite[] leftArr;
 
     //当前是否为红色BOSS坦克
-    public bool curIsRedBossTank = false;
+    //public bool curIsRedBossTank = false;
+    //是否已爆出奖励
+    private bool isCreateAward = false;
 
     private void Start()
     {
@@ -31,7 +33,7 @@ public class EnemyBoss : Enemy
         {
             case EnemyColorType.red:
                 RedTank();
-                curIsRedBossTank = true;
+                //curIsRedBossTank = true;
                 break;
             case EnemyColorType.green:
                 GreenTank();
@@ -62,31 +64,32 @@ public class EnemyBoss : Enemy
         {
             RedTank();
             CurEnemyLife = curLife;
-            curIsRedBossTank = true;
+          //  curIsRedBossTank = true;
         }
            
         else if (CurEnemyLife > 3 && CurEnemyLife <= 6)
         {
             GreenTank();
             CurEnemyLife = curLife;
-            curIsRedBossTank = false;
+           // curIsRedBossTank = false;
         }
         else if (CurEnemyLife > 1 && CurEnemyLife <= 3)
         {
             YellowTank();
             CurEnemyLife = curLife;
-            curIsRedBossTank = false;
+            //curIsRedBossTank = false;
         }
         else
         {
             WhiteTank();
             CurEnemyLife = curLife;
-            curIsRedBossTank = false;
+           // curIsRedBossTank = false;
         }
         //创建随机奖励
-        if (enemyColorType ==  EnemyColorType.red && CurEnemyLife<=6)
+        if (enemyColorType ==  EnemyColorType.red && !isCreateAward)
         {
             GameObject.Find("AwardContainer").GetComponent<CreateAward>().CreateRandomAward();
+            isCreateAward = true;
         }
     }
 
@@ -102,12 +105,11 @@ public class EnemyBoss : Enemy
         left = leftArr[0];
         //属性
         CurEnemyLife = 8;      //生命值
-        bulletAtk = 3;           //攻击力 
+        bulletAtk = 3;         //攻击力 
         autoAttackHZ = 1.5f;   //攻击频率 秒/次
-        moveSpeed = 1.5f;         //移动速度
+        moveSpeed = 1.5f;      //移动速度
         autoMoveHZ = 5;        //移动频率 秒/次
-        autoMoveTime = 2;      //每次移动时长 秒 
-        //isRedTank = true;
+        autoMoveTime = 2;      //每次移动时长 秒  
     }
     private void GreenTank()
     {

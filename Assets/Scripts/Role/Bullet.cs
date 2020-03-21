@@ -128,8 +128,8 @@ public class Bullet : MonoBehaviour
                 //穿墙逻辑 规则   1.玩家坦克达到[6,7]等级   2.敌方红色BOSS坦克可以穿墙
                 if (role == Role.PlayerBullet)
                 {
-
-                    if (GameObject.FindWithTag("Player").GetComponent<Player>().Level>=6)
+                    Player findPlayer = GameObject.FindWithTag("Player").GetComponent<Player>();
+                    if (findPlayer &&findPlayer.Level>=6)
                     {
                         Destroy(coll.gameObject);
                         AudioManager.GetInstance.PlayAudioSource(AudioManager.AudioSourceType.Default, AudioManager.GetInstance.audioClip[5]);//播放音效 

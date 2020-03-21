@@ -80,7 +80,7 @@ public class Enemy : MonoBehaviour
         }
         //无敌状态倒计时
         if (IsGod)
-        {
+        { 
             eff_Shield.SetActive(true);
             godTimer -= Time.deltaTime;
             if (godTimer <= 0)
@@ -97,6 +97,7 @@ public class Enemy : MonoBehaviour
         Move();
         if (m_IsAutoAttack) Attack();
     }
+
 
     //敌人自动移动
     private void Move()
