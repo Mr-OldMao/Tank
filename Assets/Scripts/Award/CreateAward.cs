@@ -25,18 +25,5 @@ public class CreateAward : MonoBehaviour
             insAward= Instantiate(awardPrefab[randomNum], MapCreate.GetInstance.CreateRangomPos(true), Quaternion.identity);
         insAward.transform.SetParent(this.transform);
         AudioManager.GetInstance.PlayAudioSource(AudioManager.AudioSourceType.BGM, AudioManager.GetInstance.audioClip[6]);//播放音效 
-    }
-
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    } 
 }

@@ -30,7 +30,6 @@ public class Player : MonoBehaviour
     public Sprite[] down;
     public Sprite[] left;
 
-    private Core coreState;     //鸟窝状态
     private bool isPlayMoveAudio = false; //正在播放移动音效
 
     /// <summary>
@@ -41,7 +40,7 @@ public class Player : MonoBehaviour
         get { return level; }
         set
         { 
-            if (value < 8 )
+            if (value < 8)
             { 
                 //修改移动速度和攻击频率 
                 if (value> level)
@@ -50,12 +49,25 @@ public class Player : MonoBehaviour
                     ChangeMoveAndAttackHZ(false);
                 //更新坦克等级
                 level = value;
-            } 
-            else Debug.LogError("坦克等级非法！value：" + value); 
+            }  
         }
     }
 
-
+    void Awake()
+    {
+        InitData();
+    }
+    void Start()
+    { 
+        Invoke("Init", 0.3f);
+    } 
+    private void InitData()
+    {
+        moveSpeed = CoreData.playerMoveSpeed;
+        attackHZ = CoreData.playerAttackHZ;
+        level = CoreData.playerLevel;
+        godTime = CoreData.playerGodTime;
+    }
 
     /// <summary>
     /// 修改移动速度和攻击频率  根据当前等级
@@ -122,15 +134,7 @@ public class Player : MonoBehaviour
     }
 
 
-    void Start()
-    {
-        Invoke("Init", 0.3f);
-    }
 
-    private void Init()
-    {
-        coreState = GameObject.FindGameObjectWithTag("Core").GetComponent<Core>();
-    }
     // Update is called once per frame
     void Update()
     {
@@ -148,18 +152,14 @@ public class Player : MonoBehaviour
         if (IsGod)
         {
             TankGod(ref godTime);
-        }
+        } 
     }
     void FixedUpdate()
     {
-        //鸟窝不炸才可 
-        if (coreState)
+        if (!GameManager.GetInstance.isGameOver)
         {
-            if (!coreState.isCoreDie)
-            {
-                Move();
-                if (m_IsAttack) Attack();
-            }
+            Move();
+            if (m_IsAttack) Attack();
         }
     }
 
@@ -204,7 +204,7 @@ public class Player : MonoBehaviour
         }
 
 
-        //通过h、v值 更换坦克方向贴图
+        //通过h、v值 更换坦克方向贴图 
         if (h > 0)
         {
             bulletEulerAngles = new Vector3(0, 0, -90);
@@ -233,7 +233,7 @@ public class Player : MonoBehaviour
     //玩家攻击
     private void Attack()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.J))
         {
             //生成子弹     子弹朝向问题： Quaternion.EulerAngles()---欧拉角(transform.rotation)转成四元素
             GameObject bullet = Instantiate(go_Bullet, transform.position, Quaternion.Euler(transform.eulerAngles + bulletEulerAngles));

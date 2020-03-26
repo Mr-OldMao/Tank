@@ -14,6 +14,12 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private int m_CurEnemyLife = 1;               //当前坦克生命值
     public float moveSpeed = 2f;                  //移动速度
+    [Tooltip("电脑自动移动频率")]
+    public float autoMoveHZ = 3f;                 //电脑自动移动频率 
+    private float m_AutoMoveHZTimer = 2f;         //自动移动频率计时器
+    [Tooltip("电脑每次自动移动的时间")]
+    public float autoMoveTime = 2f;               //电脑每次自动移动的时间 
+    private float m_CurMoveTime;                  //当前自动移动的时间
     public int bulletAtk = 1;                     //子弹攻击力
     public float autoAttackHZ = 0.2f;             //攻击频率
     private float m_AutoAttackHZTimer = 0;        //攻击频率计时器
@@ -26,12 +32,7 @@ public class Enemy : MonoBehaviour
 
     [Tooltip("是否允许电脑自动移动")]
     public bool canAutoMove = true;               //是否允许电脑自动移动
-    [Tooltip("电脑自动移动频率")]
-    public float autoMoveHZ = 3f;                 //电脑自动移动频率 
-    private float m_AutoMoveHZTimer = 2f;         //自动移动频率计时器
-    [Tooltip("电脑每次自动移动的时间")]
-    public float autoMoveTime = 2f;               //电脑每次自动移动的时间 
-    private float m_CurMoveTime;                  //当前自动移动的时间
+
     //实体
     public GameObject go_Bullet;
     [Tooltip("坦克爆炸状态特效")]
@@ -59,14 +60,13 @@ public class Enemy : MonoBehaviour
         //优化：可让坦克一出生就移动
         m_AutoMoveHZTimer = autoMoveHZ - 0.5f;
         m_CurMoveTime = autoMoveTime;
-        //红色坦克生命值为2
-        if (isRedTank)
-        {
-            m_CurEnemyLife = 2;
-        }
     }
 
-     void Update()
+    private void InitDate()
+    {
+
+    }
+    void Update()
     {
         //子弹攻击频率
         if (m_IsAutoAttack == false)
@@ -80,7 +80,7 @@ public class Enemy : MonoBehaviour
         }
         //无敌状态倒计时
         if (IsGod)
-        { 
+        {
             eff_Shield.SetActive(true);
             godTimer -= Time.deltaTime;
             if (godTimer <= 0)
@@ -92,8 +92,8 @@ public class Enemy : MonoBehaviour
 
 
     }
-     void FixedUpdate()
-    { 
+    void FixedUpdate()
+    {
         Move();
         if (m_IsAutoAttack) Attack();
     }
@@ -189,21 +189,26 @@ public class Enemy : MonoBehaviour
         if (!IsGod || canDestoryGodTank)
         {
             //生成粒子
-            GameObject ins_Explode = Instantiate(eff_Explode, transform.position, transform.rotation);
-            //摧毁当前敌人
-            Destroy(this.gameObject);
-            //杀敌数+1
-            PlayerManager.GetInstance.score++;
-            MapCreate.GetInstance.curEnemyCount--;
+            GameObject ins_Explode = Instantiate(eff_Explode, transform.position, transform.rotation);  
             //如果是红色坦克死亡则爆出奖励
             if (isRedTank)
             {
                 GameObject.Find("AwardContainer").GetComponent<CreateAward>().CreateRandomAward();
             }
+            //摧毁当前敌人
+            Destroy(this.gameObject);
         }
     }
-     
-     
+
+    void OnDestroy()
+    {
+        //杀敌数+1
+        PlayerManager.GetInstance.score++;
+        MapCreate.GetInstance.curEnemyCount--;
+        Debug.Log("当前场上敌人还剩下：" + MapCreate.GetInstance.curEnemyCount);
+    }
+
+
     /// <summary>
     /// 优化移动AI  敌方两坦克碰撞情况
     /// </summary>
@@ -218,5 +223,5 @@ public class Enemy : MonoBehaviour
             v = -v;
             m_CurMoveTime = autoMoveTime - 0.2f;
         }
-    } 
+    }
 }

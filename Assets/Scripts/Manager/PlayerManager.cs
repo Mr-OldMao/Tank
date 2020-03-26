@@ -4,12 +4,19 @@ using UnityEngine;
 
 /// <summary>
 /// 玩家管理器
+/// 玩家重生：玩家管理器-》玩家出生特效-》玩家实体
 /// </summary>
 public class PlayerManager : MonoBehaviour
 {
     //属性值
-    [Tooltip("生命")]
-    public int lifeValue = 3;
+    [Tooltip("生命条数")]
+    [SerializeField]
+    private int m_Life; 
+    public int Life
+    {
+        get { return m_Life; }
+        set { m_Life = value; }
+    }
     public int score = 0;
     public bool isDie = false;                //是否死亡 
     //实体
@@ -22,14 +29,16 @@ public class PlayerManager : MonoBehaviour
         get { return m_Instance; }
         set { m_Instance = value; }
     }
+
     void Awake()
     {
+        m_Life = CoreData.playerLife;
         m_Instance = this;
     }
 
     void Start()
     {
-
+        
     }
 
     void Update()
@@ -43,15 +52,15 @@ public class PlayerManager : MonoBehaviour
     //重生
     private void BornAgain()
     {
-        if (lifeValue <= 0)
+        if (m_Life <= 0)
         {
             //游戏结束
-            UIManager.isGameOver = true;
+            GameManager.GetInstance.IsGameOvoer(GameManager.GameOverType.notLife); 
         }
         else
         { 
             //重生
-            lifeValue--;
+            m_Life--;
             GameObject bornPlayerIns = Instantiate(bornPlayer, new Vector3(-2, -8, 0), Quaternion.identity);
             bornPlayerIns.GetComponent<Born>().isCreatePlayer = true;
             isDie = false;

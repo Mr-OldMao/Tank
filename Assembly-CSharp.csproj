@@ -48,20 +48,22 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Award\Award.cs" />
      <Compile Include="Assets\Scripts\Award\CreateAward.cs" />
+     <Compile Include="Assets\Scripts\GameMode\GameMode.cs" />
      <Compile Include="Assets\Scripts\Global\AutoDestroy.cs" />
      <Compile Include="Assets\Scripts\Global\CancelMark.cs" />
+     <Compile Include="Assets\Scripts\Global\CoreData.cs" />
      <Compile Include="Assets\Scripts\Manager\AudioManager.cs" />
      <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
      <Compile Include="Assets\Scripts\Manager\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\Manager\UIManager.cs" />
-     <Compile Include="Assets\Scripts\Map\Core.cs" />
      <Compile Include="Assets\Scripts\Map\MapCreate.cs" />
      <Compile Include="Assets\Scripts\Role\Born.cs" />
      <Compile Include="Assets\Scripts\Role\Bullet.cs" />
      <Compile Include="Assets\Scripts\Role\Enemy.cs" />
      <Compile Include="Assets\Scripts\Role\EnemyBoss.cs" />
      <Compile Include="Assets\Scripts\Role\Player.cs" />
-     <Compile Include="Assets\Scripts\StartScene.cs" />
+     <Compile Include="Assets\Scripts\Scene\SelectScene.cs" />
+     <Compile Include="Assets\Scripts\Scene\StartScene.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/SystemSoftware/Unity5.6.0f3/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -1,0 +1,204 @@
+Initialize engine version: 5.6.0f3 (497a0f351392)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1050 (ID=0x1c8d)
+    Vendor:   NVIDIA
+    VRAM:     1977 MB
+    Driver:   24.21.13.9836
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\UnityNameSpace\Tank\_BuildPC\坦克大战3.0_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\UnityNameSpace\Tank\_BuildPC\坦克大战3.0_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\UnityNameSpace\Tank\_BuildPC\坦克大战3.0_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\UnityNameSpace\Tank\_BuildPC\坦克大战3.0_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\UnityNameSpace\Tank\_BuildPC\坦克大战3.0_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\UnityNameSpace\Tank\_BuildPC\坦克大战3.0_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: D:\UnityNameSpace\Tank\_BuildPC\坦克大战3.0_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading D:\UnityNameSpace\Tank\_BuildPC\坦克大战3.0_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: D:\UnityNameSpace\Tank\_BuildPC\坦克大战3.0_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading D:\UnityNameSpace\Tank\_BuildPC\坦克大战3.0_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.022 seconds
+Platform assembly: D:\UnityNameSpace\Tank\_BuildPC\坦克大战3.0_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\UnityNameSpace\Tank\_BuildPC\坦克大战3.0_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.229400 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 51b4 -> priority: 1 
+  Thread -> id: 3c30 -> priority: 1 
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.983200 ms
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 303.
+Total: 0.288000 ms (FindLiveObjects: 0.018700 ms CreateObjectMapping: 0.014300 ms MarkObjects: 0.204600 ms  DeleteObjects: 0.049600 ms)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.850300 ms
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 704.
+Total: 0.340000 ms (FindLiveObjects: 0.032800 ms CreateObjectMapping: 0.026800 ms MarkObjects: 0.275000 ms  DeleteObjects: 0.004700 ms)
+
+GM:Normal
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+当前场上敌人还剩下：1,本关累计已产生敌人：1本关需要产生的敌人个数：5,还需生产敌人：4
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+产生敌人中----BornTank()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+当前场上敌人还剩下：2,本关累计已产生敌人：2本关需要产生的敌人个数：5,还需生产敌人：3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+产生敌人中----BornTank()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+当前场上敌人还剩下：3,本关累计已产生敌人：3本关需要产生的敌人个数：5,还需生产敌人：2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+产生敌人中----BornTank()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+当前场上敌人还剩下：4,本关累计已产生敌人：4本关需要产生的敌人个数：5,还需生产敌人：1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+产生敌人中----BornTank()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+当前场上敌人还剩下：5,本关累计已产生敌人：5本关需要产生的敌人个数：5,还需生产敌人：0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+产生敌人中----BornTank()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+当前场上敌人还剩下：4
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Core(Clone) (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CoreDestory
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Core(Clone) (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CoreDestory
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Core(Clone) (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CoreDestory
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Core(Clone) (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CoreDestory
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Core(Clone) (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CoreDestory
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+当前场上敌人还剩下：3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+当前场上敌人还剩下：2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+当前场上敌人还剩下：1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+当前场上敌人还剩下：0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UnloadTime: 2.504100 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 704.
+Total: 0.350400 ms (FindLiveObjects: 0.030200 ms CreateObjectMapping: 0.027500 ms MarkObjects: 0.282400 ms  DeleteObjects: 0.009100 ms)
+
+GM:Normal
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+当前场上敌人还剩下：1,本关累计已产生敌人：1本关需要产生的敌人个数：5,还需生产敌人：4
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+产生敌人中----BornTank()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+当前场上敌人还剩下：2,本关累计已产生敌人：2本关需要产生的敌人个数：5,还需生产敌人：3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+产生敌人中----BornTank()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+当前场上敌人还剩下：3,本关累计已产生敌人：3本关需要产生的敌人个数：5,还需生产敌人：2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+产生敌人中----BornTank()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+当前场上敌人还剩下：4,本关累计已产生敌人：4本关需要产生的敌人个数：5,还需生产敌人：1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+产生敌人中----BornTank()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+当前场上敌人还剩下：3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+当前场上敌人还剩下：2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+当前场上敌人还剩下：1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+当前场上敌人还剩下：0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+

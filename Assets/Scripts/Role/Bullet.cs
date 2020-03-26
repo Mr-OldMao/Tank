@@ -43,11 +43,10 @@ public class Bullet : MonoBehaviour
                 if (role == Role.EnemyBullet)
                 {
                     Destroy(gameObject);
-                    coll.GetComponent<Player>().Level -= buttetATK;
                     //判断当前坦克的生命值(等级)是否为0
-                    if (coll.GetComponent<Player>().Level >= 0)
-                    {
-                        //没死 
+                    if (coll.GetComponent<Player>().Level - buttetATK >= 0)
+                    {//没死
+                        coll.GetComponent<Player>().Level -= buttetATK;
                         AudioManager.GetInstance.PlayAudioSource(AudioManager.AudioSourceType.Default, AudioManager.GetInstance.audioClip[7]);//播放音效
                     }
                     else
@@ -62,13 +61,12 @@ public class Bullet : MonoBehaviour
                 if (role == Role.PlayerBullet)
                 {
                     Destroy(gameObject);
-                    int life =-1;
+                    int life = -1;
                     //判断是否是boss
                     if (coll.GetComponent<EnemyBoss>())
                     {
                         //Boss 则处理变色、更新坦克属性 处理 
                         coll.GetComponent<EnemyBoss>().CurEnemyLife -= buttetATK;
-                        Debug.Log(coll.GetComponent<EnemyBoss>().CurEnemyLife);
                         coll.GetComponent<EnemyBoss>().ChangeColor();
                         life = coll.GetComponent<EnemyBoss>().CurEnemyLife;
                     }
@@ -76,9 +74,8 @@ public class Bullet : MonoBehaviour
                     {
                         coll.GetComponent<Enemy>().CurEnemyLife -= buttetATK;
                         life = coll.GetComponent<Enemy>().CurEnemyLife;
-                    } 
-
-                    //判断当前子弹能否杀死当前敌人
+                    }
+                    //判断当前子弹能否杀死当前敌人  
                     if (life > 0)
                     {
                         //没死
@@ -107,8 +104,8 @@ public class Bullet : MonoBehaviour
                 }
                 break;
             case "Core":
-                //鸟窝
-                coll.SendMessage("CoreDestory");
+                //鸟窝 
+                GameManager.GetInstance.IsGameOvoer(GameManager.GameOverType.coreDestory); 
                 Destroy(gameObject);
                 AudioManager.GetInstance.PlayAudioSource(AudioManager.AudioSourceType.Default, AudioManager.GetInstance.audioClip[5]);//播放音效 
                 Debug.Log("CoreDestory");
@@ -124,12 +121,20 @@ public class Bullet : MonoBehaviour
                 break;
             case "Rock":
                 //墙
-                Destroy(gameObject); 
-                //穿墙逻辑 规则   1.玩家坦克达到[6,7]等级   2.敌方红色BOSS坦克可以穿墙
+                Destroy(gameObject);
+                //穿墙逻辑     规则  1.玩家坦克达到[6,7]等级   2.敌方红色BOSS坦克可以穿墙
+                //是否为玩家的子弹
                 if (role == Role.PlayerBullet)
                 {
-                    Player findPlayer = GameObject.FindWithTag("Player").GetComponent<Player>();
-                    if (findPlayer &&findPlayer.Level>=6)
+                    Player findPlayer = null;
+                    try
+                    {
+                        findPlayer = GameObject.FindWithTag("Player").GetComponent<Player>();
+                    }
+                    catch (System.Exception)
+                    {
+                    }
+                    if (findPlayer && findPlayer.Level >= 6)
                     {
                         Destroy(coll.gameObject);
                         AudioManager.GetInstance.PlayAudioSource(AudioManager.AudioSourceType.Default, AudioManager.GetInstance.audioClip[5]);//播放音效 
@@ -142,13 +147,17 @@ public class Bullet : MonoBehaviour
                 }
                 else  //敌方红色BOSS坦克  ==>等价与 子弹攻击力=3
                 {
-                    if(buttetATK==3)
+                    if (buttetATK == 3)
                         Destroy(coll.gameObject);
-                } 
+                }
+                break;
+            case "AirRock":
+                Destroy(gameObject);
+                //边界墙
                 break;
             default:
                 break;
         }
     }
-    
+
 }

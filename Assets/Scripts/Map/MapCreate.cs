@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// 创建地图
-/// 1）创建敌人
+/// 1）创建初始玩家、敌人的出生点特效-》玩家、敌人实体
+/// 2）创建地图上砖、墙、边界墙、水、草、鸟窝
 /// </summary>
 public class MapCreate : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class MapCreate : MonoBehaviour
     public List<Vector3> itemPostionList = new List<Vector3>(); //标记已用坐标(坦克不标记)
     [Tooltip("当前敌人个数")]
     public int curEnemyCount = 0;
+
+
     private static MapCreate m_Instance;
     public static MapCreate GetInstance
     {
@@ -24,19 +27,51 @@ public class MapCreate : MonoBehaviour
         set { m_Instance = value; }
     }
 
-    [Tooltip("自动生成敌人的周期（时间间隔）")]
-    public float createEnemyTimer = 5;
+    //[Tooltip("自动生成敌人的周期（时间间隔）")]
+    //public float createEnemyTimer = 5;
+
+    private bool isGetEnemyMax = false;      //是否到达了 敌军上限
+    public int addEnemyCount = 0;           //累计产生的敌军个数
 
     void Start()
     {
         m_Instance = this;
         Init();
     }
+
+    /// <summary>
+    /// 重新初始化 通关后逻辑
+    /// </summary>
+    public void ReInit()
+    {
+        //暂停 通关判定
+        GameMode.isListenPassCurLevel = false;
+        //计数器归零
+        addEnemyCount = 0;
+        //坐标列表清空
+        itemPostionList.Clear();
+        //清除墙体
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Destroy(transform.GetChild(i).gameObject); 
+        } 
+        //禁止之前Invoke创造敌人
+        CancelInvoke("CreateEnemy"); 
+        Init();
+
+        GameMode.isListenPassCurLevel = true; 
+    }
+
     /// <summary>
     /// 初始化
     /// </summary>
     private void Init()
     {
+        //生成玩家
+        GameObject playerIns = Instantiate(eff_Born, new Vector3(-2, -8, 0), Quaternion.identity);
+        playerIns.GetComponent<Born>().isCreatePlayer = true;
+        //生成敌人  1s后开始生成，之后每隔3S生成一次 
+        InvokeRepeating("CreateEnemy", 1f, CoreData.createEnemyTimer);
         //实例化鸟窝 0,-7,0
         CreateItem(mapItem[0], new Vector3(0, -8, 0), Quaternion.identity);
         //实例化鸟窝边界
@@ -63,12 +98,7 @@ public class MapCreate : MonoBehaviour
         for (int i = 0; i < 50; i++)
         {
             CreateItem(mapItem[2], CreateRangomPos(), Quaternion.identity);
-        }
-        //生成玩家
-        GameObject insPlayer = Instantiate(eff_Born, new Vector3(-2, -8, 0), Quaternion.identity);
-        insPlayer.GetComponent<Born>().isCreatePlayer = true;
-        //生成敌人  1s后开始生成，之后每隔3S生成一次
-        InvokeRepeating("CreateEnemy", 1f, createEnemyTimer);
+        } 
     }
 
     /// <summary>
@@ -133,7 +163,6 @@ public class MapCreate : MonoBehaviour
     /// <returns></returns>
     public Vector3 CreateRangomPos(bool isAllMap = false)
     {
-
         while (true)
         {
             Vector3 createPos = new Vector3(Random.Range(-9, 10), Random.Range(-7, 8), 0);
@@ -172,34 +201,66 @@ public class MapCreate : MonoBehaviour
         m_CoreBorderContainer[2] = CreateItem(mapItem[index], new Vector3(-1, -8, 0), Quaternion.identity);
         m_CoreBorderContainer[3] = CreateItem(mapItem[index], new Vector3(1, -8, 0), Quaternion.identity);
         m_CoreBorderContainer[4] = CreateItem(mapItem[index], new Vector3(0, -7, 0), Quaternion.identity);
-
     }
 
+    void Update()
+    {
+        //判断当前是否到达了敌军上限
+        //前提： 当前场上敌军<  Max场上敌军
+        if (curEnemyCount < CoreData.enemyMaxCount)
+        {
+            isGetEnemyMax = false;
+        }
+        else
+        {
+            isGetEnemyMax = true;
+        }
+    }
 
     /// <summary>
     /// 随机生成敌人
+    /// 产生规则：
+    /// 1.累计生产的军 < 本关所需要生产的敌军  
+    /// 2.未达到场上敌军上限
     /// </summary>
     private void CreateEnemy()
     {
-        //0-左 1-中 2-右
-        int num = Random.Range(0, 3);
-        if (curEnemyCount < GameManager.GetInstance.createTankMax)
+        //累计生产的军<所需要生产的敌军
+        if (addEnemyCount < CoreData.needCreateEnemyCount)
         {
-            curEnemyCount++;
-            switch (num)
+            //未达到场上敌军上限   
+            if (!isGetEnemyMax)
             {
-                case 0:
-                    Instantiate(eff_Born, new Vector3(-10, 8, 0), Quaternion.identity);
-                    break;
-                case 1:
-                    Instantiate(eff_Born, new Vector3(0, 8, 0), Quaternion.identity);
-                    break;
-                case 2:
-                    Instantiate(eff_Born, new Vector3(10, 8, 0), Quaternion.identity);
-                    break;
-                default:
-                    break;
+                //0-左 1-中 2-右
+                int num = Random.Range(0, 3);
+                //前提： 当前场上敌军<  Max场上敌军
+                if (curEnemyCount < CoreData.enemyMaxCount)
+                {
+                    curEnemyCount++;
+                    addEnemyCount++;
+                    Debug.Log("当前场上敌人还剩下：" + curEnemyCount + ",本关累计已产生敌人：" + addEnemyCount +
+                       "本关需要产生的敌人个数：" + CoreData.needCreateEnemyCount + ",还需生产敌人：" + (CoreData.needCreateEnemyCount - addEnemyCount));
+                    switch (num)
+                    {
+                        case 0:
+                            Instantiate(eff_Born, new Vector3(-10, 8, 0), Quaternion.identity);
+                            break;
+                        case 1:
+                            Instantiate(eff_Born, new Vector3(0, 8, 0), Quaternion.identity);
+                            break;
+                        case 2:
+                            Instantiate(eff_Born, new Vector3(10, 8, 0), Quaternion.identity);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    isGetEnemyMax = true;
+                }
             }
+
         }
     }
 }

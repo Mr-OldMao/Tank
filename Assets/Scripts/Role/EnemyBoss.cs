@@ -50,30 +50,27 @@ public class EnemyBoss : Enemy
     }
 
     /// <summary>
-    /// 变色处理
-    /// 敌方坦克： 
-    /// 初始化绿色生命值6=》被击中三次=》变黄色=》被击中2次=》变白色=》再被击中一次=》死亡
-    /// 初始化红色生命值8 =》被击中两次=》绿色生命值6=》被击中三次=》变黄色=》被击中2次=》变白色=》再被击中一次=》死亡
+    /// 变色处理 3.0 
     /// </summary> 
     public void ChangeColor()
     {
         //记录当前生命值
         int curLife = CurEnemyLife;
-        if (CurEnemyLife <= 0 || CurEnemyLife > 8) return;
-        if (CurEnemyLife > 6 && CurEnemyLife <= 8)
+        if (CurEnemyLife <= 0 || CurEnemyLife > CoreData.enemy_BossRed_Life) return;
+        if (CurEnemyLife > CoreData.enemy_BossGreen_Life && CurEnemyLife <= CoreData.enemy_BossRed_Life)
         {
             RedTank();
             CurEnemyLife = curLife;
-          //  curIsRedBossTank = true;
+            //  curIsRedBossTank = true;
         }
-           
-        else if (CurEnemyLife > 3 && CurEnemyLife <= 6)
+
+        else if (CurEnemyLife > CoreData.enemy_BossYellow_Life && CurEnemyLife <= CoreData.enemy_BossGreen_Life)
         {
             GreenTank();
             CurEnemyLife = curLife;
-           // curIsRedBossTank = false;
+            // curIsRedBossTank = false;
         }
-        else if (CurEnemyLife > 1 && CurEnemyLife <= 3)
+        else if (CurEnemyLife > CoreData.enemy_BossWhite_Life && CurEnemyLife <= CoreData.enemy_BossYellow_Life)
         {
             YellowTank();
             CurEnemyLife = curLife;
@@ -83,15 +80,59 @@ public class EnemyBoss : Enemy
         {
             WhiteTank();
             CurEnemyLife = curLife;
-           // curIsRedBossTank = false;
+            // curIsRedBossTank = false;
         }
         //创建随机奖励
-        if (enemyColorType ==  EnemyColorType.red && !isCreateAward)
+        if (enemyColorType == EnemyColorType.red && !isCreateAward)
         {
             GameObject.Find("AwardContainer").GetComponent<CreateAward>().CreateRandomAward();
             isCreateAward = true;
         }
     }
+
+    ///// <summary>
+    ///// 变色处理  old2.1
+    ///// 敌方坦克： 
+    ///// 初始化绿色生命值6=》被击中三次=》变黄色=》被击中2次=》变白色=》再被击中一次=》死亡
+    ///// 初始化红色生命值8 =》被击中两次=》绿色生命值6=》被击中三次=》变黄色=》被击中2次=》变白色=》再被击中一次=》死亡
+    ///// </summary> 
+    //public void ChangeColor()
+    //{
+    //    //记录当前生命值
+    //    int curLife = CurEnemyLife;
+    //    if (CurEnemyLife <= 0 || CurEnemyLife > 8) return;
+    //    if (CurEnemyLife > 6 && CurEnemyLife <= 8)
+    //    {
+    //        RedTank();
+    //        CurEnemyLife = curLife;
+    //      //  curIsRedBossTank = true;
+    //    }
+           
+    //    else if (CurEnemyLife > 3 && CurEnemyLife <= 6)
+    //    {
+    //        GreenTank();
+    //        CurEnemyLife = curLife;
+    //       // curIsRedBossTank = false;
+    //    }
+    //    else if (CurEnemyLife > 1 && CurEnemyLife <= 3)
+    //    {
+    //        YellowTank();
+    //        CurEnemyLife = curLife;
+    //        //curIsRedBossTank = false;
+    //    }
+    //    else
+    //    {
+    //        WhiteTank();
+    //        CurEnemyLife = curLife;
+    //       // curIsRedBossTank = false;
+    //    }
+    //    //创建随机奖励
+    //    if (enemyColorType ==  EnemyColorType.red && !isCreateAward)
+    //    {
+    //        GameObject.Find("AwardContainer").GetComponent<CreateAward>().CreateRandomAward();
+    //        isCreateAward = true;
+    //    }
+    //}
 
 
     #region 四种颜色坦克的属性配置

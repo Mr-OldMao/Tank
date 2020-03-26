@@ -15,7 +15,7 @@ public class Award : MonoBehaviour
 {
     //当前奖励 
     public AwardType awardType;
-     
+
     [Header("奖励参数设置")]
     [Tooltip("静止移动的时间")]
     public float notMoveTime = 5;
@@ -28,7 +28,7 @@ public class Award : MonoBehaviour
     //[Tooltip("全屏炸弹是否能摧毁无敌状态的坦克")]
     //public   bool canBombGodTank = true;
     [Tooltip("全屏炸弹是否能摧毁无敌状态的坦克")]
-    public  bool canBombGodTank = true;
+    public bool canBombGodTank = true;
 
     [Tooltip("获得当前奖励的坦克Tag值")]
     private string getAwardTankTag;
@@ -61,7 +61,6 @@ public class Award : MonoBehaviour
     void Start()
     {
         m_EnemyContainer = GameObject.Find("EnemyContainer");
-        //StartCoroutine(WaitSomeTime(10,()=> m_player = GameObject.FindWithTag("Player")));
     }
 
     /// <summary>
@@ -106,13 +105,22 @@ public class Award : MonoBehaviour
         getAwardTankTag = coll.gameObject.tag;
         if (getAwardTankTag == "Player")
         {
-            Debug.Log("获得奖励：" + awardType);
+            Debug.Log("玩家获得奖励：" + awardType);
             GetAward();
             //销毁奖励道具 
             Destroy(gameObject, Mathf.Max(new float[] { notMoveTime, coreRockTime, tankGodTime }));
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             AudioManager.GetInstance.PlayAudioSource(AudioManager.AudioSourceType.BGM, AudioManager.GetInstance.audioClip[6]);//播放音效 
+        }
+        //噩梦模式的敌人触碰奖励
+        else if (GameManager.GetInstance.getSelectMode == SelectScene.SelectMode.Hard && getAwardTankTag == "Enemy")
+        {
+            Debug.Log("敌人获得奖励：" + awardType);
+            //销毁奖励道具 
+            Destroy(gameObject, Mathf.Max(new float[] { notMoveTime, coreRockTime, tankGodTime }));
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 
@@ -141,7 +149,7 @@ public class Award : MonoBehaviour
     /// <returns></returns>
     private void LifeAdd()
     {
-        PlayerManager.GetInstance.lifeValue++;
+        PlayerManager.GetInstance.Life++;
     }
     /// <summary>
     /// 静止移动
@@ -196,7 +204,7 @@ public class Award : MonoBehaviour
     #endregion
 
 
-   
+
 
     IEnumerator WaitSomeTime(float time, UnityAction action)
     {

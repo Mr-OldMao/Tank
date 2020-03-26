@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class AutoDestroy : MonoBehaviour {
 	[Tooltip("n秒过后自动销毁")]
-	public float destoryTimer = 3f;
+	public  float destoryTimer = 1f;
 	// Use this for initialization
 	void Start () {
 		Destroy(this.gameObject, destoryTimer);
