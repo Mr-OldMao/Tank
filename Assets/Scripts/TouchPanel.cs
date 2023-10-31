@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 摇杆控制面板控制物体移动，仿EasyTouch
+/// 参考：https://blog.csdn.net/Mr_Sun88/article/details/84680361
+/// </summary>
 public class TouchPanel : MonoBehaviour
 {
     /// <summary>
