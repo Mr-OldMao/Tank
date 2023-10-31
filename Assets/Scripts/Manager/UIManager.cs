@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
     //游戏结束原因
     public Text txt_GameOverCause;
 
-
+    public Button btnFire;
     private static UIManager m_Instace;
     public static UIManager GetInstance
     {

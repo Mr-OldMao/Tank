@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     public Sprite[] left;
 
     private bool isPlayMoveAudio = false; //正在播放移动音效
-
+    private TouchPanel m_TouchPanel;
     /// <summary>
     /// get set 坦克等级  间接修改移动速度和攻击频率
     /// </summary>
@@ -39,28 +39,31 @@ public class Player : MonoBehaviour
     {
         get { return level; }
         set
-        { 
+        {
             if (value < 8)
-            { 
+            {
                 //修改移动速度和攻击频率 
-                if (value> level)
+                if (value > level)
                     ChangeMoveAndAttackHZ();
                 else
                     ChangeMoveAndAttackHZ(false);
                 //更新坦克等级
                 level = value;
-            }  
+            }
         }
     }
 
     void Awake()
     {
         InitData();
+        m_TouchPanel = FindObjectOfType<TouchPanel>();
+        //MoveByEasyTouch();
+        UIManager.GetInstance.btnFire.onClick.AddListener(()=> Attack());
     }
     void Start()
-    { 
+    {
         Invoke("Init", 0.3f);
-    } 
+    }
     private void InitData()
     {
         moveSpeed = CoreData.playerMoveSpeed;
@@ -72,16 +75,16 @@ public class Player : MonoBehaviour
     /// <summary>
     /// 修改移动速度和攻击频率  根据当前等级
     /// </summary>
-    public void ChangeMoveAndAttackHZ(bool isAdd =true)
+    public void ChangeMoveAndAttackHZ(bool isAdd = true)
     {
         //升级
         if (isAdd)
         {
             //[0,2] 增加移动+0.1   攻击频率提高0.015
             if (level >= 0 && level < 3)
-            { 
+            {
                 moveSpeed += 0.1f;
-                attackHZ -= 0.015f;   
+                attackHZ -= 0.015f;
             }
             //[3,5] 增加移动+0.15   攻击频率提高0.02
             else if (level >= 3 && level < 6)
@@ -97,12 +100,12 @@ public class Player : MonoBehaviour
         }
         //降级
         else
-        { 
+        {
             if (level >= 0 && level < 3)
             {
-                 moveSpeed -= 0.1f;
-                attackHZ += 0.015f; 
-            } 
+                moveSpeed -= 0.1f;
+                attackHZ += 0.015f;
+            }
             else if (level >= 3 && level < 6)
             {
                 moveSpeed -= 0.15f;
@@ -113,7 +116,7 @@ public class Player : MonoBehaviour
                 moveSpeed -= 0.1f;
                 attackHZ += 0.015f;
             }
-        } 
+        }
     }
 
     /// <summary>
@@ -152,14 +155,26 @@ public class Player : MonoBehaviour
         if (IsGod)
         {
             TankGod(ref godTime);
-        } 
+        }
     }
     void FixedUpdate()
     {
         if (!GameManager.GetInstance.isGameOver)
         {
-            Move();
-            if (m_IsAttack) Attack();
+            //float h = Input.GetAxisRaw("Horizontal");
+            //float v = Input.GetAxisRaw("Vertical");
+            float h = m_TouchPanel._hor;
+            float v = m_TouchPanel._ver;
+            
+            Move(h, v);
+
+            if (m_IsAttack)
+            {
+                if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.J))
+                {
+                    Attack();
+                }
+            } 
         }
     }
 
@@ -180,11 +195,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    //private void MoveByEasyTouch()
+    //{
+    //    ETCJoystick JoystickLeft = GameObject.FindObjectOfType<ETCJoystick>();
+    //    JoystickLeft.onMove.AddListener((v2) =>
+    //    {
+    //        Move(v2.x, v2.y);
+    //    });
+    //}
+
     //玩家移动
-    private void Move()
+    private void Move(float h, float v)
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
         //音效
         if (h != 0 || v != 0)  //在移动
         {
@@ -202,45 +224,74 @@ public class Player : MonoBehaviour
                 isPlayMoveAudio = false;
             }
         }
-
-
         //通过h、v值 更换坦克方向贴图 
-        if (h > 0)
+        if (Mathf.Abs(h) > Mathf.Abs(v))
         {
-            bulletEulerAngles = new Vector3(0, 0, -90);
-            GetComponent<SpriteRenderer>().sprite = right[level];
+            if (h > 0)
+            {
+                bulletEulerAngles = new Vector3(0, 0, -90);
+                GetComponent<SpriteRenderer>().sprite = right[level];
+            }
+            if (h < 0)
+            {
+                bulletEulerAngles = new Vector3(0, 0, 90);
+                GetComponent<SpriteRenderer>().sprite = left[level];
+            }
+            transform.Translate(Vector3.right * h * moveSpeed * Time.deltaTime * moveSpeed);
         }
-        if (h < 0)
+        else
         {
-            bulletEulerAngles = new Vector3(0, 0, 90);
-            GetComponent<SpriteRenderer>().sprite = left[level];
+            if (v > 0)
+            {
+                bulletEulerAngles = new Vector3(0, 0, 0);
+                GetComponent<SpriteRenderer>().sprite = up[level];
+            }
+            if (v < 0)
+            {
+                bulletEulerAngles = new Vector3(0, 0, 180);
+                GetComponent<SpriteRenderer>().sprite = down[level];
+            }
+            transform.Translate(Vector3.up * v * moveSpeed * Time.deltaTime * moveSpeed);
         }
-        transform.Translate(Vector3.right * h * moveSpeed * Time.deltaTime * moveSpeed);
-        if (h != 0) return;         //避免水平和竖直按键一起按
-        if (v > 0)
-        {
-            bulletEulerAngles = new Vector3(0, 0, 0);
-            GetComponent<SpriteRenderer>().sprite = up[level];
-        }
-        if (v < 0)
-        {
-            bulletEulerAngles = new Vector3(0, 0, 180);
-            GetComponent<SpriteRenderer>().sprite = down[level];
-        }
-        transform.Translate(Vector3.up * v * moveSpeed * Time.deltaTime * moveSpeed);
+
         //Debug.Log("Horizontal:" + h + ",Vertical:" + v);
+
+
+        ////通过h、v值 更换坦克方向贴图 
+        //if (h > 0)
+        //{
+        //    bulletEulerAngles = new Vector3(0, 0, -90);
+        //    GetComponent<SpriteRenderer>().sprite = right[level];
+        //}
+        //if (h < 0)
+        //{
+        //    bulletEulerAngles = new Vector3(0, 0, 90);
+        //    GetComponent<SpriteRenderer>().sprite = left[level];
+        //}
+        //transform.Translate(Vector3.right * h * moveSpeed * Time.deltaTime * moveSpeed);
+        //if (h != 0) return;         //避免水平和竖直按键一起按
+        //if (v > 0)
+        //{
+        //    bulletEulerAngles = new Vector3(0, 0, 0);
+        //    GetComponent<SpriteRenderer>().sprite = up[level];
+        //}
+        //if (v < 0)
+        //{
+        //    bulletEulerAngles = new Vector3(0, 0, 180);
+        //    GetComponent<SpriteRenderer>().sprite = down[level];
+        //}
+        //transform.Translate(Vector3.up * v * moveSpeed * Time.deltaTime * moveSpeed);
+        ////Debug.Log("Horizontal:" + h + ",Vertical:" + v);
     }
     //玩家攻击
     private void Attack()
     {
-        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.J))
-        {
-            //生成子弹     子弹朝向问题： Quaternion.EulerAngles()---欧拉角(transform.rotation)转成四元素
-            GameObject bullet = Instantiate(go_Bullet, transform.position, Quaternion.Euler(transform.eulerAngles + bulletEulerAngles));
-            ChangeBulletSpeedAndATK(ref bullet.GetComponent<Bullet>().bulletSpeed,
-                ref bullet.GetComponent<Bullet>().buttetATK);
-            m_IsAttack = false;
-        }
+        //生成子弹     子弹朝向问题： Quaternion.EulerAngles()---欧拉角(transform.rotation)转成四元素
+        GameObject bullet = Instantiate(go_Bullet, transform.position, Quaternion.Euler(transform.eulerAngles + bulletEulerAngles));
+        ChangeBulletSpeedAndATK(ref bullet.GetComponent<Bullet>().bulletSpeed,
+            ref bullet.GetComponent<Bullet>().buttetATK);
+        m_IsAttack = false;
+
     }
 
     private void OnCollisionEnter2D(Collision2D coll)
@@ -248,11 +299,11 @@ public class Player : MonoBehaviour
         //敌我坦克接触
         if (coll.gameObject.tag == "Enemy")
         {
-            coll.gameObject.SendMessage("Die",false); //不能销毁无敌敌人
+            coll.gameObject.SendMessage("Die", false); //不能销毁无敌敌人
             if (IsGod == false)
             {
                 Die();
-            } 
+            }
             AudioManager.GetInstance.PlayAudioSource(AudioManager.AudioSourceType.Default, AudioManager.GetInstance.audioClip[0]);//播放音效
         }
     }

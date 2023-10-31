@@ -10,11 +10,13 @@ public class StartScene : MonoBehaviour
 {
     public Image img_First;
     public Image img_Double;
+    public Button btnStart;
      
     void Start()
     {
         img_First.gameObject.SetActive(true);
         img_Double.gameObject.SetActive(false);
+        btnStart.onClick.AddListener(() => SceneManager.LoadScene("SelectScene"));
     }
 
     // Update is called once per frame

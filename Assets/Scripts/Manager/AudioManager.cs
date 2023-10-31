@@ -59,9 +59,9 @@ public class AudioManager : MonoBehaviour
             case AudioSourceType.Move:
                 if (audioSourceMove.clip != audioClip)
                 {
-                    audioSourceMove.clip = audioClip; 
-                }  
-                audioSourceMove.Play(); 
+                    audioSourceMove.clip = audioClip;
+                }
+                audioSourceMove.Play();
                 break;
             case AudioSourceType.BGM:
                 if (audioSourceBGM.clip != audioClip)
