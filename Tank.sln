@@ -1,7 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tank", "Assembly-CSharp.csproj", "{BE59C06D-9AAC-64A8-0390-8CA6FBC949DD}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{BE59C06D-9AAC-64A8-0390-8CA6FBC949DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wx", "Wx.csproj", "{99A6A34B-581E-5B5D-0C4F-5596E7406006}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WxEditor", "WxEditor.csproj", "{E3B0006C-5733-CC68-352F-E338DF85261F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +17,14 @@ Global
 		{BE59C06D-9AAC-64A8-0390-8CA6FBC949DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE59C06D-9AAC-64A8-0390-8CA6FBC949DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE59C06D-9AAC-64A8-0390-8CA6FBC949DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99A6A34B-581E-5B5D-0C4F-5596E7406006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99A6A34B-581E-5B5D-0C4F-5596E7406006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99A6A34B-581E-5B5D-0C4F-5596E7406006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99A6A34B-581E-5B5D-0C4F-5596E7406006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3B0006C-5733-CC68-352F-E338DF85261F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3B0006C-5733-CC68-352F-E338DF85261F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3B0006C-5733-CC68-352F-E338DF85261F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3B0006C-5733-CC68-352F-E338DF85261F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
