@@ -1,28 +1,37 @@
 {
-  "appid": "wxca887af54239ebde",
-  "compileType": "game",
-  "libVersion": "3.1.5",
-  "packOptions": {
-    "ignore": [],
-    "include": []
-  },
-  "setting": {
-    "coverView": true,
-    "es6": true,
-    "postcss": true,
-    "minified": true,
-    "enhance": true,
-    "showShadowRootInWxmlPanel": true,
-    "packNpmRelationList": [],
-    "babelSetting": {
-      "ignore": [],
-      "disablePlugins": [],
-      "outputPath": ""
+    "appid": "tt8ae1fc5c15ec7f9807",
+    "compileType": "game",
+    "libVersion": "3.1.5",
+    "packOptions": {
+        "ignore": [],
+        "include": []
+    },
+    "setting": {
+        "coverView": true,
+        "es6": true,
+        "postcss": true,
+        "minified": true,
+        "enhance": true,
+        "showShadowRootInWxmlPanel": true,
+        "packNpmRelationList": [],
+        "babelSetting": {
+            "ignore": [],
+            "disablePlugins": [],
+            "outputPath": ""
+        },
+        "urlCheck": true
+    },
+    "condition": {},
+    "editorSetting": {
+        "tabIndent": "insertSpaces",
+        "tabSize": 2
+    },
+    "unity": {
+        "build": {
+            "webgl": "F:\\PrivateProject\\MiniGame\\Tank\\Tank\\tt-minigame\\webgl_package-20251013_173150.zip",
+            "native": {}
+        },
+        "publishType": "2",
+        "unityEngineVersion": "2022.3.62f1c1"
     }
-  },
-  "condition": {},
-  "editorSetting": {
-    "tabIndent": "insertSpaces",
-    "tabSize": 2
-  }
 }

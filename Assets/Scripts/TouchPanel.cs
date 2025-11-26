@@ -3,47 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Ò¡¸Ë¿ØÖÆÃæ°å¿ØÖÆÎïÌåÒÆ¶¯£¬·ÂEasyTouch
-/// ²Î¿¼£ºhttps://blog.csdn.net/Mr_Sun88/article/details/84680361
+/// æ‘‡æ†æ§åˆ¶é¢æ¿æ§åˆ¶ç‰©ä½“ç§»åŠ¨ï¼Œä»¿EasyTouch
+/// å‚è€ƒï¼šhttps://blog.csdn.net/Mr_Sun88/article/details/84680361
 /// </summary>
 public class TouchPanel : MonoBehaviour
 {
     /// <summary>
-    /// Ò¡¸Ë±³¾°
+    /// æ‘‡æ†èƒŒæ™¯
     /// </summary>
     [SerializeField]
     private Transform _joyBg;
     /// <summary>
-    /// Ò¡¸ËÖĞĞÄ
+    /// æ‘‡æ†ä¸­å¿ƒ
     /// </summary>
     [SerializeField]
     private Transform _joyCenter;
     /// <summary>
-    /// Ò¡¸Ë°ë¾¶
+    /// æ‘‡æ†åŠå¾„
     /// </summary>
     private float _radius;
     /// <summary>
-    /// ÒÆ¶¯ÖĞĞÄ
+    /// ç§»åŠ¨ä¸­å¿ƒ
     /// </summary>  
     private Vector2 _moveCenter;
     /// <summary>
-    /// Êó±êµ½ÒÆ¶¯ÖĞĞÄµÄÏòÁ¿
+    /// é¼ æ ‡åˆ°ç§»åŠ¨ä¸­å¿ƒçš„å‘é‡
     /// </summary>
     private Vector2 _mouseToCenterVect;
     /// <summary>
-    /// Êó±êµ½ÖĞĞÄµãµÄ¾àÀë
+    /// é¼ æ ‡åˆ°ä¸­å¿ƒç‚¹çš„è·ç¦»
     /// </summary>
     private float _mouseToCenterDistance;
     /// <summary>
-    /// Ë®Æ½»ñÈ¡Öµ
+    /// æ°´å¹³è·å–å€¼
     /// </summary>
     public float _hor { get; private set; }
     /// <summary>
-    /// ´¹Ö±»ñÈ¡Öµ
+    /// å‚ç›´è·å–å€¼
     /// </summary>
     public float _ver { get; private set; }
     /// <summary>
-    /// Ğı×ª½Ç¶È
+    /// æ—‹è½¬è§’åº¦
     /// </summary>
     private float _rotAngle;
 
@@ -52,103 +52,105 @@ public class TouchPanel : MonoBehaviour
     {
         //_joyBg = transform.Find("JoyBg");
         //_joyCenter = transform.Find("JoyBg/JoyCenter");
-        _player = GameObject.Find("Player").transform;
+        //_player = GameObject.Find("Player").transform;
         _radius = 100;
     }
     /// <summary>
-    /// ¿ªÊ¼ÍÏ¶¯
+    /// å¼€å§‹æ‹–åŠ¨
     /// </summary>
     public void OnDragBegain()
     {
 
-        //ÒÆ¶¯ÖĞĞÄµã¸³Öµ
+        //ç§»åŠ¨ä¸­å¿ƒç‚¹èµ‹å€¼
         _moveCenter = Input.mousePosition;
         Debug.Log("OnDragBegain " + _moveCenter);
-        //ÏÔÊ¾Ò¡¸Ë
+        //æ˜¾ç¤ºæ‘‡æ†
         _joyBg.gameObject.SetActive(true);
         _joyCenter.gameObject.SetActive(true);
-        //Ò¡¸Ë±³¾°Î»ÖÃĞŞÕıµ½µã»÷Î»ÖÃ
+        //æ‘‡æ†èƒŒæ™¯ä½ç½®ä¿®æ­£åˆ°ç‚¹å‡»ä½ç½®
         _joyBg.localPosition = _moveCenter;
-        //Ò¡¸ËÖĞĞÄÎ»ÖÃĞŞÕıµ½µã»÷Î»ÖÃ
+        //æ‘‡æ†ä¸­å¿ƒä½ç½®ä¿®æ­£åˆ°ç‚¹å‡»ä½ç½®
         _joyCenter.localPosition = _moveCenter;
     }
 
     /// <summary>
-    /// ÕıÔÚÍÏ¶¯
+    /// æ­£åœ¨æ‹–åŠ¨
     /// </summary>
     public void OnDragMove()
     {
         Debug.Log("OnDragMove");
 
-        // ÖĞĞÄµêµ½´¥ÃşµãµÄÏòÁ¿¸³Öµ
+        // ä¸­å¿ƒåº—åˆ°è§¦æ‘¸ç‚¹çš„å‘é‡èµ‹å€¼
         _mouseToCenterVect = (Vector2)Input.mousePosition - _moveCenter;
-        //ÖĞĞÄµêµ½´¥ÃşµãµÄ¾àÀë¼ÆËã
+        //ä¸­å¿ƒåº—åˆ°è§¦æ‘¸ç‚¹çš„è·ç¦»è®¡ç®—
         _mouseToCenterDistance = Mathf.Clamp(_mouseToCenterVect.magnitude, 0, 100);
-        //¸ù¾İ¾àÀëÀ´ÅĞ¶ÏÒ¡¸ËÖĞĞÄµÄÎ»ÖÃ
+        //æ ¹æ®è·ç¦»æ¥åˆ¤æ–­æ‘‡æ†ä¸­å¿ƒçš„ä½ç½®
         if (_mouseToCenterDistance < _radius)
         {
-            //ÈôÊÇ¾àÀëĞ¡ÓÚ×î´ó°ë¾¶£¬ÕâÀïÈ¡ÏòÁ¿µÄ¹éÒ»Öµ£¬¾ÍÊÇÄ£Îª1µÄÏòÁ¿£¬³ËÉÏÖĞĞÄµ½´¥ÃşµãµÄ¾àÀë£¬Õâ¸ö¾ÍÊÇÒ¡¸ËÖĞĞÄÓ¦¸ÃÒÆ¶¯µÄ·½ÏòºÍ¾àÀë£¬²¢ÇÒÒÆ¶¯ÊÇÔÚÒÆ¶¯ÖĞĞÄµÄ»ù´¡ÉÏ£¬ËùÒÔ¼ÓÉÏÒÆ¶¯ÖĞĞÄµÄ×ø±ê
+            //è‹¥æ˜¯è·ç¦»å°äºæœ€å¤§åŠå¾„ï¼Œè¿™é‡Œå–å‘é‡çš„å½’ä¸€å€¼ï¼Œå°±æ˜¯æ¨¡ä¸º1çš„å‘é‡ï¼Œä¹˜ä¸Šä¸­å¿ƒåˆ°è§¦æ‘¸ç‚¹çš„è·ç¦»ï¼Œè¿™ä¸ªå°±æ˜¯æ‘‡æ†ä¸­å¿ƒåº”è¯¥ç§»åŠ¨çš„æ–¹å‘å’Œè·ç¦»ï¼Œå¹¶ä¸”ç§»åŠ¨æ˜¯åœ¨ç§»åŠ¨ä¸­å¿ƒçš„åŸºç¡€ä¸Šï¼Œæ‰€ä»¥åŠ ä¸Šç§»åŠ¨ä¸­å¿ƒçš„åæ ‡
             _joyCenter.localPosition = _mouseToCenterVect.normalized * _mouseToCenterDistance + _moveCenter;
         }
         else
         {
-            //Í¬ÉÏ£¬²»¹ı¾ÍÊÇÏŞ¶¨ÁËÒÆ¶¯µÄ×î´ó¾àÀë
+            //åŒä¸Šï¼Œä¸è¿‡å°±æ˜¯é™å®šäº†ç§»åŠ¨çš„æœ€å¤§è·ç¦»
             _joyCenter.localPosition = _mouseToCenterVect.normalized * _radius + _moveCenter;
         }
-        //Ò¡¸ËÖĞĞÄµÄX - ÒÆ¶¯ÖĞĞÄµÄx¾ÍÊÇË®Æ½µÄ±ä»¯Öµ£¬ÕâÀï /100 ¿ØÖÆ_horÔÚ£¨-1£¬,1£©Ö®¼ä
+        //æ‘‡æ†ä¸­å¿ƒçš„X - ç§»åŠ¨ä¸­å¿ƒçš„xå°±æ˜¯æ°´å¹³çš„å˜åŒ–å€¼ï¼Œè¿™é‡Œ /100 æ§åˆ¶_horåœ¨ï¼ˆ-1ï¼Œ,1ï¼‰ä¹‹é—´
         _hor = (_joyCenter.localPosition.x - _moveCenter.x) / 100;
-        //Ò¡¸ËÖĞĞÄµÄY - ÒÆ¶¯ÖĞĞÄµÄY¾ÍÊÇ´¹Ö±µÄ±ä»¯Öµ£¬ÕâÀï /100 ¿ØÖÆ_horÔÚ£¨-1£¬,1£©Ö®¼ä
+        //æ‘‡æ†ä¸­å¿ƒçš„Y - ç§»åŠ¨ä¸­å¿ƒçš„Yå°±æ˜¯å‚ç›´çš„å˜åŒ–å€¼ï¼Œè¿™é‡Œ /100 æ§åˆ¶_horåœ¨ï¼ˆ-1ï¼Œ,1ï¼‰ä¹‹é—´
         _ver = (_joyCenter.localPosition.y - _moveCenter.y) / 100;
 
-        //½Ç¶È¾ÍÊÇ ÖĞĞÄµêµ½´¥ÃşµãµÄÏòÁ¿ ºÍ 2DÆ½ÃæYÖáÕı·½ÏòµÄ¼Ğ½Ç£¬ÕâÀïÖ»ÄÜÏÔÊ¾0¡ª¡ª180¶È
+        //è§’åº¦å°±æ˜¯ ä¸­å¿ƒåº—åˆ°è§¦æ‘¸ç‚¹çš„å‘é‡ å’Œ 2Då¹³é¢Yè½´æ­£æ–¹å‘çš„å¤¹è§’ï¼Œè¿™é‡Œåªèƒ½æ˜¾ç¤º0â€”â€”180åº¦
         _rotAngle = Vector3.Angle(_mouseToCenterVect, Vector3.up);
 
-        //ÕâÀï¸ù¾İ_horµÄÕı¸ºÀ´ÅĞ¶ÏÒ¡¸ËÖĞĞÄÊÇÎ»ÓÚÒÆ¶¯ÖĞĞÄ×ó²à»¹ÊÇÓÒ²à£¬È»ºóĞŞ¸Ä¶ÈÊı£¬ÏÔÊ¾ÔÚ0¡ª¡ª360Ö®¼ä
+        //è¿™é‡Œæ ¹æ®_horçš„æ­£è´Ÿæ¥åˆ¤æ–­æ‘‡æ†ä¸­å¿ƒæ˜¯ä½äºç§»åŠ¨ä¸­å¿ƒå·¦ä¾§è¿˜æ˜¯å³ä¾§ï¼Œç„¶åä¿®æ”¹åº¦æ•°ï¼Œæ˜¾ç¤ºåœ¨0â€”â€”360ä¹‹é—´
         if (_hor < 0)
         {
             _rotAngle = 360 - _rotAngle;
         }
-        //Vector3.forward ÒÔVector3.upÎªÖĞĞÄĞı×ªÖá£¬Ğı×ª_rotAngle¶È£¬ÕâÀï¼ÆËã³öÖ÷½ÇµÄĞı×ª¶ÈÊı
-        _forwardTarget = Quaternion.AngleAxis(_rotAngle, Vector3.up) * Vector3.forward;
+        //Vector3.forward ä»¥Vector3.upä¸ºä¸­å¿ƒæ—‹è½¬è½´ï¼Œæ—‹è½¬_rotAngleåº¦ï¼Œè¿™é‡Œè®¡ç®—å‡ºä¸»è§’çš„æ—‹è½¬åº¦æ•°
+        //_forwardTarget = Quaternion.AngleAxis(_rotAngle, Vector3.up) * Vector3.forward;
     }
 
     /// <summary>
-    /// ÍÏ¶¯½áÊø
+    /// æ‹–åŠ¨ç»“æŸ
     /// </summary>
     public void OnDragEnd()
     {
         Debug.Log("OnDragEnd");
 
-        //Ë®Æ½ÒÆ¶¯Öµ¹éÁã
+        //æ°´å¹³ç§»åŠ¨å€¼å½’é›¶
         _hor = 0;
-        //´¹Ö±ÒÆ¶¯Öµ¹éÁã
+        //å‚ç›´ç§»åŠ¨å€¼å½’é›¶
         _ver = 0;
-        //Òş²ØÒ¡¸Ë
+        //éšè—æ‘‡æ†
         _joyBg.gameObject.SetActive(false);
         _joyCenter.gameObject.SetActive(false);
 
     }
-    /// Ö÷½Ç
-    /// </summary>
-    private Transform _player;
-    /// <summary>
-    /// Ä¿±ê³¯Ïò
-    /// </summary>
-    private Vector3 _forwardTarget;
+    ///// ä¸»è§’
+    ///// </summary>
+    //private Transform _player;
+    ///// <summary>
+    ///// ç›®æ ‡æœå‘
+    ///// </summary>
+    //private Vector3 _forwardTarget;
 
-    // Update is called once per frame
-    void Update()
-    {
-        //Ö»ÓĞÔÚË®Æ½»òÕß´¹Ö±Öµ´óÓÚ0µÄÇé¿öÏÂ£¬Ö÷½Ç²ÅÒÆ¶¯»òĞı×ª
-        if (Mathf.Abs(_hor) > 0 || Mathf.Abs(_ver) > 0)
-        {
-            //Mathf.Clamp(_mouseToCenterDistance/100,0,1)£º¸ù¾İÒ¡¸ËÖĞĞÄµÄÒÆ¶¯¾àÀëÅĞ¶ÏËÙ¶È
-            //new Vector3(0,0,0.1f*Mathf.Clamp(_mouseToCenterDistance/100,0,1))£ºÔÚZÖá·½ÏòÉÏÒÆ¶¯Mathf.Clamp(_mouseToCenterDistance/100,0,1)µÄ¾àÀë£¬ÏŞ¶¨ÔÚ£¨0-1£©µÄ´óĞ¡
-            //²»Í£µØÔÚZÖá·½ÏòÉÏÒÆ¶¯Mathf.Clamp(_mouseToCenterDistance/100,0,1)µÄ¾àÀë
-            _player.position += _player.TransformDirection(new Vector3(0, 0, 0.1f * Mathf.Clamp(_mouseToCenterDistance / 100, 0, 1)));
-            //¸ù¾İÒ¡¸ËµÄĞı×ªÉèÖÃÖ÷½ÇµÄ³¯Ïò
-            _player.forward = _forwardTarget;
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    //åªæœ‰åœ¨æ°´å¹³æˆ–è€…å‚ç›´å€¼å¤§äº0çš„æƒ…å†µä¸‹ï¼Œä¸»è§’æ‰ç§»åŠ¨æˆ–æ—‹è½¬
+    //    if (Mathf.Abs(_hor) > 0 || Mathf.Abs(_ver) > 0)
+    //    {
+    //        //Mathf.Clamp(_mouseToCenterDistance/100,0,1)ï¼šæ ¹æ®æ‘‡æ†ä¸­å¿ƒçš„ç§»åŠ¨è·ç¦»åˆ¤æ–­é€Ÿåº¦
+    //        //new Vector3(0,0,0.1f*Mathf.Clamp(_mouseToCenterDistance/100,0,1))ï¼šåœ¨Zè½´æ–¹å‘ä¸Šç§»åŠ¨Mathf.Clamp(_mouseToCenterDistance/100,0,1)çš„è·ç¦»ï¼Œé™å®šåœ¨ï¼ˆ0-1ï¼‰çš„å¤§å°
+    //        //ä¸åœåœ°åœ¨Zè½´æ–¹å‘ä¸Šç§»åŠ¨Mathf.Clamp(_mouseToCenterDistance/100,0,1)çš„è·ç¦»
+    //        _player.position += _player.TransformDirection(new Vector3(0, 0, 0.1f * Mathf.Clamp(_mouseToCenterDistance / 100, 0, 1)));
+    //        //æ ¹æ®æ‘‡æ†çš„æ—‹è½¬è®¾ç½®ä¸»è§’çš„æœå‘
+    //        _player.forward = _forwardTarget;
 
-        }
-    }
+    //    }
+
+    //}
+
 }

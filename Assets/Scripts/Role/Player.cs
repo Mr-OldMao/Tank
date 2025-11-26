@@ -1,6 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Player : MonoBehaviour
 {
@@ -167,6 +168,7 @@ public class Player : MonoBehaviour
             float v = m_TouchPanel._ver;
             
             Move(h, v);
+            MoveByKeycode();
 
             if (m_IsAttack)
             {
@@ -229,31 +231,36 @@ public class Player : MonoBehaviour
         {
             if (h > 0)
             {
-                bulletEulerAngles = new Vector3(0, 0, -90);
-                GetComponent<SpriteRenderer>().sprite = right[level];
+                //bulletEulerAngles = new Vector3(0, 0, -90);
+                //GetComponent<SpriteRenderer>().sprite = right[level];
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
             }
             if (h < 0)
             {
-                bulletEulerAngles = new Vector3(0, 0, 90);
-                GetComponent<SpriteRenderer>().sprite = left[level];
+                //bulletEulerAngles = new Vector3(0, 0, 90);
+                //GetComponent<SpriteRenderer>().sprite = left[level];
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
             }
-            transform.Translate(Vector3.right * h * moveSpeed * Time.deltaTime * moveSpeed);
         }
         else
         {
             if (v > 0)
             {
-                bulletEulerAngles = new Vector3(0, 0, 0);
-                GetComponent<SpriteRenderer>().sprite = up[level];
+                //bulletEulerAngles = new Vector3(0, 0, 0);
+                //GetComponent<SpriteRenderer>().sprite = up[level];
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
             if (v < 0)
             {
-                bulletEulerAngles = new Vector3(0, 0, 180);
-                GetComponent<SpriteRenderer>().sprite = down[level];
+                //bulletEulerAngles = new Vector3(0, 0, 180);
+                //GetComponent<SpriteRenderer>().sprite = down[level];
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
             }
-            transform.Translate(Vector3.up * v * moveSpeed * Time.deltaTime * moveSpeed);
         }
-
+        if (h != 0 || v != 0)
+        {
+            transform.Translate(Vector3.up * Time.deltaTime * moveSpeed);
+        }
         //Debug.Log("Horizontal:" + h + ",Vertical:" + v);
 
 
@@ -283,6 +290,33 @@ public class Player : MonoBehaviour
         //transform.Translate(Vector3.up * v * moveSpeed * Time.deltaTime * moveSpeed);
         ////Debug.Log("Horizontal:" + h + ",Vertical:" + v);
     }
+
+    private void MoveByKeycode()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            transform.Translate(Vector3.up  * Time.deltaTime * moveSpeed);
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
+            transform.Translate(Vector3.up * Time.deltaTime * moveSpeed);
+
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+            transform.Translate(Vector3.up * Time.deltaTime * moveSpeed);
+
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90)); 
+            transform.Translate(Vector3.up * Time.deltaTime * moveSpeed);
+        }
+    }
+
     //玩家攻击
     private void Attack()
     {
